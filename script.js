@@ -1,29 +1,6 @@
 let rootContainerEl = document.getElementById("rootContainer");
 let myInputEl = document.getElementById("myInput");
 let errorMsgEl = document.getElementById("errorMsg");
-//-----------------------------------------------------------------------------------------------------------
-
-// let listTodo = [
-//     {
-//     title: "HTML",
-//     id: 1,
-//   },
-//   {
-//     title: "CSS",
-//     id: 2,
-//   },
-//   {
-//     title: "BOOTSTRAP",
-//     id: 3,
-//   },
-// ];
-
-//--------------------------------------------------------------------------------------------------------
-// let getStoreTodo = localStorage.getItem("myListTodo");
-// let listTodo = JSON.parse(getStoreTodo) || [];
-// let listTodo = JSON.parse(getStoreTodo);
-
-// list empty than give us error that the reason :-- null error handle
 function getTodoFromLocalStorage() {
   let getStoreTodo = localStorage.getItem("myListTodo");
 
@@ -35,13 +12,10 @@ function getTodoFromLocalStorage() {
   }
 }
 let listTodo = getTodoFromLocalStorage();
-
-//-------------------------------------------------------------------------------------------------------
 function onSaveTodo() {
   let stringifyTodo = JSON.stringify(listTodo);
   localStorage.setItem("myListTodo", stringifyTodo);
 }
-//---------------------------------------------------------------------------------------------------------
 function onStatusChange(checkId, titleId, todoId) {
   let chID = document.getElementById(checkId);
   let myTitle = document.getElementById(titleId);
@@ -59,7 +33,6 @@ function onStatusChange(checkId, titleId, todoId) {
     listTodo[index].isChecked = true;
   }
 }
-//-----------------------------------------------------------------------------------------------------------
 function onDeleteTodo(todoID, todoId) {
   let todoEl = document.getElementById(todoID);
 
@@ -75,7 +48,6 @@ function onDeleteTodo(todoID, todoId) {
   }
   // onSaveTodo(); // Save the updated listTodo array to localStorage
 }
-//---------------------------------------------------------------------------------------------------------
 function onAddTodo(Todo) {
   let checkboxId = "checkbox" + Todo.id; // create checkboxID
   let titleId = "myTitle" + Todo.id;
@@ -89,10 +61,9 @@ function onAddTodo(Todo) {
   let checkboxEl = document.createElement("input");
   checkboxEl.type = "checkbox";
   checkboxEl.id = checkboxId;
-  //-------------------------------
   if (Todo.isChecked === true) {
     checkboxEl.checked = true;
-  } //---------------------------------
+  } 
   checkboxEl.onclick = function () {
     onStatusChange(checkboxId, titleId, Todo.id);
   };
@@ -125,7 +96,6 @@ function onAddTodo(Todo) {
   delateICOEl.classList.add("fa-solid", "fa-trash");
   buttonEl.appendChild(delateICOEl);
 }
-//---------------------------------------------------------------------------------------------------
 function addNewTodo() {
   // let unique = listTodo.length + 1;
   let TodoTitle = myInputEl.value;
@@ -145,33 +115,6 @@ function addNewTodo() {
   }
   myInputEl.value = "";
 }
-//--------------------------------------------------------------------------------------------------------
 for (let event of listTodo) {
   onAddTodo(event);
-}
-//-------------------------------------------------------------------------------------------------------
-
-// ----------- PROMISE PRACTICE -----------------
-let url = "https://apis.ccbp.in/jokes/random";
- 
-async function onSaveTodo() {
-/*   const url = "https://apis.ccbp.in/jokes/random";
-
-  fetch(url)
-    .then((responce) => {
-      return responce.json();
-    })
-    .then((data) => {
-      console.log(data.value);
-      document.getElementById("randomJocks").textContent = data.value;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  console.log(feachdata); */
-
-  let responce = await fetch(url);
-  let data = await responce.json();
-  document.getElementById("randomJocks").textContent = data.value;
-
 }
